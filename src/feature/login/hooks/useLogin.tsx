@@ -9,19 +9,19 @@ import { AxiosResponse } from 'axios';
 
 const useLogin = () => {
     const { showToast } = useToast();
-    const { login: loginUser   } = useAuth();
+    const { login } = useAuth();
     const passwordRef = useRef<HTMLInputElement>(null);
     const [credential, setCredential] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [rememberMe, setRememberMe] = useState<boolean>(false);
 
-    const login = () => {
+    const loginUser = () => {
         const loginDto = new Login(credential, password, rememberMe);
         axiosInstance
             .post('auth/login', loginDto.getLoginDto())
             .then((response: AxiosResponse<LoginResponse>) => {
                 const data = response.data;
-                loginUser(data.token, data.user._id);
+                login(data.token, data.user._id);
             })
             .catch((error) => {
                 if (error.statusCode === 400) {
@@ -49,7 +49,7 @@ const useLogin = () => {
     const keyDownEnter = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key !== 'Enter') return;
         passwordRef.current?.blur();
-        login();
+        loginUser();
     }
     const onChangeCredential = (event: ChangeEvent<HTMLInputElement>) => {
         setCredential(event.target.value);
@@ -65,7 +65,7 @@ const useLogin = () => {
         password,
         rememberMe,
         passwordRef,
-        login,
+        loginUser,
         forgotPassword,
         keyDownEnter,
         onChangeCredential,

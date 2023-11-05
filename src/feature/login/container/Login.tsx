@@ -14,7 +14,7 @@ const Login = () => {
         password,
         rememberMe,
         passwordRef,
-        login,
+        loginUser,
         forgotPassword,
         keyDownEnter,
         onChangeCredential,
@@ -69,7 +69,7 @@ const Login = () => {
                     <Button label="¿Olvidaste tu contraseña?" severity="secondary" link size="small" onClick={forgotPassword}/>
                 </div>
                 <div className="flex flex-col pb-6 pt-4">
-                    <Button label="Ingresar" onClick={login}/>
+                    <Button label="Ingresar" onClick={loginUser}/>
                 </div>
             </div>
         </main>
