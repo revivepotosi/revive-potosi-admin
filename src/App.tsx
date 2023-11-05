@@ -9,6 +9,7 @@ import RequireAuth from './components/RequireAuth/RequireAuth';
 import ToastProvider from './context/Toast/ToastProvider';
 import Toast from './components/Toast/Toast';
 import NoRequireAuth from './components/NoRequireAuth/NoRequireAuth';
+import MainContainer from './components/MainContainer/MainContainer';
 
 export default function App() {
     return (
@@ -26,14 +27,19 @@ export default function App() {
                                 }
                             />
                             <Route
-                                path="/home"
+                                path="/"
                                 element={
                                     <RequireAuth>
-                                        <Home />
+                                        <MainContainer />
                                     </RequireAuth>
                                 }
-                            />
-                            <Route path="*" element={<Navigate to="/home" replace />} />
+                            >
+                                <Route
+                                    index
+                                    element={<Home />}
+                                />
+                            </Route>
+                            <Route path="*" element={<Navigate to="/" replace />} />
                         </Routes>
                         <Toast />
                     </>
