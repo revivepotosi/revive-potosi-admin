@@ -13,12 +13,12 @@ const AuthReducer = (state: AuthState, action: AuthAction) => {
                 userID: payload.userID,
             };
         case LOGOUT:
-            localStorage.setItem('token', '');
-            localStorage.setItem('userID', '');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userID');
             return {
                 ...state,
-                token: payload.token,
-                userID: payload.userID,
+                token: '',
+                userID: '',
             };
         default:
             return state;

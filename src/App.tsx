@@ -8,6 +8,7 @@ import Home from './feature/home/container/Home';
 import RequireAuth from './components/RequireAuth/RequireAuth';
 import ToastProvider from './context/Toast/ToastProvider';
 import Toast from './components/Toast/Toast';
+import NoRequireAuth from './components/NoRequireAuth/NoRequireAuth';
 
 export default function App() {
     return (
@@ -16,7 +17,14 @@ export default function App() {
                 <ToastProvider>
                     <>
                         <Routes>
-                            <Route path="/login" element={<Login />} />
+                            <Route
+                                path="/login"
+                                element={
+                                    <NoRequireAuth>
+                                        <Login />
+                                    </NoRequireAuth>
+                                }
+                            />
                             <Route
                                 path="/home"
                                 element={
