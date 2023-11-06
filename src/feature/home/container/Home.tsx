@@ -5,9 +5,9 @@ const Home = () => {
     const { logoutUser } = useHome();
     return (
         <div>
-            <Button label='Salir' onClick={logoutUser}/>
+            <Button label="Salir" onClick={logoutUser} />
         </div>
-    )
+    );
 };
 
 export default Home;

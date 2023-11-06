@@ -17,7 +17,7 @@ const useAuthError = () => {
             logout();
             navigate('/login');
             return;
-        };
+        }
         if (statusCode === 403) {
             showToast({
                 severity: 'error',
@@ -26,13 +26,13 @@ const useAuthError = () => {
             });
             navigate('/home');
             return;
-        };
+        }
         showToast({
             severity: 'error',
             summary: 'Error de sistema',
             detail: 'Ha ocurrido un error, favor intentarlo más tarde.',
         });
-    }
+    };
     return { getAuthError };
 };
 

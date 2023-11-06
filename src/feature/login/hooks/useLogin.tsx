@@ -31,7 +31,7 @@ const useLogin = () => {
                         detail: error.message,
                     });
                     return;
-                };
+                }
                 showToast({
                     severity: 'error',
                     summary: 'Error al iniciar sesión',
@@ -50,16 +50,16 @@ const useLogin = () => {
         if (event.key !== 'Enter') return;
         passwordRef.current?.blur();
         loginUser();
-    }
+    };
     const onChangeCredential = (event: ChangeEvent<HTMLInputElement>) => {
         setCredential(event.target.value);
-    }
+    };
     const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
-    }
+    };
     const onChangeRememberMe = () => {
-        setRememberMe((rememberMe) => !rememberMe)
-    }
+        setRememberMe((rememberMe) => !rememberMe);
+    };
     return {
         credential,
         password,
@@ -71,7 +71,7 @@ const useLogin = () => {
         onChangeCredential,
         onChangePassword,
         onChangeRememberMe,
-    }
+    };
 };
 
 export default useLogin;

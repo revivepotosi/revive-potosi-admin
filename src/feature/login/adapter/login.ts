@@ -2,7 +2,7 @@ import { isEmail } from '../../../utils/utils';
 
 export class Login {
     private username?: string;
-    private email? :string;
+    private email?: string;
     private password: string;
     private rememberMe: boolean;
 
@@ -20,17 +20,17 @@ export class Login {
         const login = {
             password: this.password,
             rememberMe: this.rememberMe,
-        }
+        };
         if (this.username) {
-            return ({
+            return {
                 ...login,
                 username: this.username,
-            })
+            };
         } else {
-            return ({
+            return {
                 ...login,
                 email: this.email,
-            })
+            };
         }
     }
 }

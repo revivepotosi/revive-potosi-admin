@@ -12,7 +12,10 @@ const AuthProvider = (props: AuthProviderProps) => {
 
     const login = (token: string, userID: string) => {
         try {
-            dispatch({ type: LOGIN, payload: { ...initialState, token, userID } });
+            dispatch({
+                type: LOGIN,
+                payload: { ...initialState, token, userID },
+            });
             navigate('/home');
         } catch (error) {
             console.error(error);
@@ -34,7 +37,9 @@ const AuthProvider = (props: AuthProviderProps) => {
         logout,
     };
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+    return (
+        <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+    );
 };
 
 export default AuthProvider;

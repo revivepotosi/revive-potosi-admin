@@ -24,7 +24,7 @@ const useUserService = () => {
             .catch((error) => {
                 getAuthError(error.statusCode);
             });
-    }
+    };
     return { users, getUser };
 };
 

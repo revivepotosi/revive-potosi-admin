@@ -7,7 +7,7 @@ const useHome = () => {
     const { getUser } = useUserService();
     const logoutUser = () => {
         logout();
-    }
+    };
     useEffect(() => {
         console.log('xD');
         getUser();

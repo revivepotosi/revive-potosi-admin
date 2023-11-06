@@ -34,12 +34,12 @@ export default function App() {
                                     </RequireAuth>
                                 }
                             >
-                                <Route
-                                    index
-                                    element={<Home />}
-                                />
+                                <Route index element={<Home />} />
                             </Route>
-                            <Route path="*" element={<Navigate to="/" replace />} />
+                            <Route
+                                path="*"
+                                element={<Navigate to="/" replace />}
+                            />
                         </Routes>
                         <Toast />
                     </>

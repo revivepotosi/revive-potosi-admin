@@ -4,8 +4,6 @@ import { Toast, ToastMessage } from 'primereact/toast';
 import ToastContext from './ToastContext';
 import { ToastState, ToastProviderProps } from './props';
 
-
-
 const ToastProvider = (props: ToastProviderProps) => {
     const { children } = props;
     const toastRef = useRef<Toast>(null);
@@ -23,7 +21,9 @@ const ToastProvider = (props: ToastProviderProps) => {
         showToast,
     };
 
-    return <ToastContext.Provider value={value}>{children}</ToastContext.Provider>;
+    return (
+        <ToastContext.Provider value={value}>{children}</ToastContext.Provider>
+    );
 };
 
 export default ToastProvider;
