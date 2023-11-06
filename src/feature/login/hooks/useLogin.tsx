@@ -21,7 +21,7 @@ const useLogin = () => {
             .post('auth/login', loginDto.getLoginDto())
             .then((response: AxiosResponse<LoginResponse>) => {
                 const data = response.data;
-                login(data.token, data.user._id);
+                login(data.token, data.user._id, data.user.roles);
             })
             .catch((error) => {
                 if (error.statusCode === 400) {

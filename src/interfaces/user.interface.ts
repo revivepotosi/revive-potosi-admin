@@ -1,3 +1,5 @@
+import { Role } from './role.interface';
+
 export interface User {
     _id: string;
     username: string;
@@ -5,6 +7,6 @@ export interface User {
     name: string;
     lastname: string;
     password?: string;
-    roles: string[];
+    roles: Role[];
     isActive: boolean;
 }

@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
 
+import { Role } from '../../interfaces/role.interface';
+
 interface AuthState {
     token: string;
     userID: string;
-    login: (token: string, userID: string) => void;
+    roles: Role[];
+    login: (token: string, userID: string, roles: Role[]) => void;
     logout: () => void;
 }
 
