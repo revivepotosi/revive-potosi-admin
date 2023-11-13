@@ -3,13 +3,13 @@ import { useState } from 'react';
 import { AxiosResponse } from 'axios';
 import axiosInstance from '../../../api/interceptor/axios-interceptor';
 import useAuth from '../../../hooks/useAuth';
-import useAuthError from '../../../hooks/useAuthError';
 import { User } from '../../../interfaces/user.interface';
+import useToast from '../../../hooks/useToast';
 
 const useUserService = () => {
     const { token } = useAuth();
+    const { showToast } = useToast();
     const [users, setUsers] = useState<User[]>([]);
-    const { getAuthError } = useAuthError();
     const getUser = () => {
         axiosInstance
             .get('user', {
@@ -22,7 +22,11 @@ const useUserService = () => {
                 setUsers(data);
             })
             .catch((error) => {
-                getAuthError(error.statusCode);
+                showToast({
+                    severity: 'error',
+                    summary: 'Algo ha ocurrido',
+                    detail: error.message,
+                });
             });
     };
     return { users, getUser };

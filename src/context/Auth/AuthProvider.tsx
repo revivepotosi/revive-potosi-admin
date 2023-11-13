@@ -5,6 +5,7 @@ import { LOGIN, LOGOUT } from './types';
 import { AuthProviderProps } from './props';
 import { useNavigate } from 'react-router-dom';
 import { Role } from '../../interfaces/role.interface';
+import ROUTES from '../../navigation/routes';
 
 const AuthProvider = (props: AuthProviderProps) => {
     const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -17,7 +18,7 @@ const AuthProvider = (props: AuthProviderProps) => {
                 type: LOGIN,
                 payload: { ...initialState, token, userID, roles },
             });
-            navigate('/home');
+            navigate(ROUTES.HOME);
         } catch (error) {
             console.error(error);
         }
@@ -26,7 +27,7 @@ const AuthProvider = (props: AuthProviderProps) => {
     const logout = () => {
         try {
             dispatch({ type: LOGOUT, payload: { ...initialState } });
-            navigate('/login');
+            navigate(ROUTES.LOGIN);
         } catch (error) {
             console.error(error);
         }

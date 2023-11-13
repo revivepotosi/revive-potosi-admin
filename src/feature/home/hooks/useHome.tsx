@@ -9,7 +9,6 @@ const useHome = () => {
         logout();
     };
     useEffect(() => {
-        console.log('xD');
         getUser();
     }, []);
     return { logoutUser };

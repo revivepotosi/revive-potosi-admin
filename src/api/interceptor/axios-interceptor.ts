@@ -1,6 +1,14 @@
-// eslint-disable-next-line import/named
-import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+/* eslint-disable import/named */
+import axios, {
+    AxiosError,
+    AxiosInstance,
+    AxiosResponse,
+    HttpStatusCode,
+    InternalAxiosRequestConfig,
+} from 'axios';
 import CONFIG from '../utils/config';
+import ROUTES from '../../navigation/routes';
+import globalRouter from '../../navigation/globalRouter';
 
 const axiosInstance: AxiosInstance = axios.create({
     baseURL: CONFIG.baseURL,
@@ -20,6 +28,19 @@ axiosInstance.interceptors.response.use(
         return response;
     },
     (error: AxiosError) => {
+        const status = error.response?.status;
+        if (status === HttpStatusCode.Unauthorized && globalRouter) {
+            globalRouter.navigate?.(ROUTES.SESSION_EXPIRED);
+            return new Promise(() => {});
+        }
+        if (status === HttpStatusCode.Forbidden && globalRouter) {
+            globalRouter.navigate?.(ROUTES.FORBIDDEN);
+            return new Promise(() => {});
+        }
+        if (status === HttpStatusCode.InternalServerError && globalRouter) {
+            globalRouter.navigate?.(ROUTES.GENERAL_ERROR);
+            return new Promise(() => {});
+        }
         return Promise.reject(error.response?.data);
     },
 );
