@@ -4,4 +4,9 @@ const isEmail = (text: string): boolean => {
     return regex.test(text);
 };
 
-export { isEmail };
+const getFullName = (name: string, lastname: string): string =>
+    `${name} ${lastname}`;
+
+const getAvatarLetter = (fullName: string) => fullName[0];
+
+export { isEmail, getFullName, getAvatarLetter };

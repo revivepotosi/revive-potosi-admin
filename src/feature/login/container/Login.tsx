@@ -62,7 +62,7 @@ const Login = () => {
                             Contraseña
                         </label>
                         <Password
-                            id="password"
+                            inputId="password"
                             inputRef={passwordRef}
                             pt={passwordStyle}
                             value={password}

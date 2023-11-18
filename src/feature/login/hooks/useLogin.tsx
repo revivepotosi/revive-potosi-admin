@@ -5,7 +5,9 @@ import { Login } from '../adapter/login';
 import useAuth from '../../../hooks/useAuth';
 import { LoginResponse } from '../interfaces/login-respose.interface';
 // eslint-disable-next-line import/named
-import { AxiosResponse } from 'axios';
+import { AxiosResponse, HttpStatusCode } from 'axios';
+import { Session } from '../../../interfaces/session.interface';
+import { getFullName } from '../../../utils/utils';
 
 const useLogin = () => {
     const { showToast } = useToast();
@@ -21,10 +23,16 @@ const useLogin = () => {
             .post('auth/login', loginDto.getLoginDto())
             .then((response: AxiosResponse<LoginResponse>) => {
                 const data = response.data;
-                login(data.token, data.user._id, data.user.roles);
+                const session: Session = {
+                    token: data.token,
+                    userID: data.user._id,
+                    roles: data.user.roles,
+                    fullName: getFullName(data.user.name, data.user.lastname),
+                };
+                login(session);
             })
             .catch((error) => {
-                if (error.statusCode === 400) {
+                if (error?.statusCode === HttpStatusCode.BadRequest) {
                     showToast({
                         severity: 'error',
                         summary: 'Error al iniciar sesión',

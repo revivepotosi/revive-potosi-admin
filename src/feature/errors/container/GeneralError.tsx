@@ -1,16 +1,15 @@
-import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line import/named
 import { ButtonProps } from 'primereact/button';
 import ErrorContainer from '../../../components/ErrorContainer/ErrorContainer';
+import useAppNavigation from '../../../navigation/useAppNavigation';
 import CONSTANTS from '../utils/contanst';
-import ROUTES from '../../../navigation/routes';
 
 const GeneralError = () => {
-    const navigate = useNavigate();
+    const { goHome } = useAppNavigation();
     const buttons: ButtonProps[] = [
         {
             label: CONSTANTS.GENERAL_ERROR.BUTTON.LABEL,
-            onClick: () => navigate(ROUTES.HOME),
+            onClick: goHome,
             severity: 'help',
         },
     ];

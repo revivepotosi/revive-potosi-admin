@@ -4,7 +4,9 @@ import { Props } from './types';
 import ROUTES from '../../navigation/routes';
 
 const NoRequireAuth = ({ children }: Props) => {
-    const { token } = useAuth();
+    const {
+        session: { token },
+    } = useAuth();
     const location = useLocation();
     if (token) {
         return <Navigate to={ROUTES.HOME} state={{ from: location }} replace />;

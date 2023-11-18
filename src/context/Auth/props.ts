@@ -1,13 +1,12 @@
 /* eslint-disable no-unused-vars */
 
-import { Role } from '../../interfaces/role.interface';
+import { Session } from '../../interfaces/session.interface';
 
 interface AuthState {
-    token: string;
-    userID: string;
-    roles: Role[];
-    login: (token: string, userID: string, roles: Role[]) => void;
+    session: Session;
+    login: (session: Session) => void;
     logout: () => void;
+    logoutWithoutRedirect: () => void;
 }
 
 interface AuthAction {

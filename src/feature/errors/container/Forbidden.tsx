@@ -1,27 +1,23 @@
-import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line import/named
 import { ButtonProps } from 'primereact/button';
 import ErrorContainer from '../../../components/ErrorContainer/ErrorContainer';
 import CONSTANTS from '../utils/contanst';
-import ROUTES from '../../../navigation/routes';
 import useAuth from '../../../hooks/useAuth';
+import useAppNavigation from '../../../navigation/useAppNavigation';
 
 const Forbidden = () => {
-    const navigate = useNavigate();
+    const { goHome } = useAppNavigation();
     const { logout } = useAuth();
 
     const buttons: ButtonProps[] = [
         {
             label: CONSTANTS.FORBIDDEN.BUTTON_HOME.LABEL,
-            onClick: () => navigate(ROUTES.HOME),
+            onClick: goHome,
             severity: 'help',
         },
         {
             label: CONSTANTS.FORBIDDEN.BUTTON_LOGIN.LABEL,
-            onClick: () => {
-                logout();
-                navigate(ROUTES.HOME);
-            },
+            onClick: () => logout(),
             link: true,
             raised: true,
             severity: 'secondary',

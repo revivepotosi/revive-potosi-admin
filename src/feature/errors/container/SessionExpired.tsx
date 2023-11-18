@@ -1,24 +1,23 @@
-import { useNavigate } from 'react-router-dom';
+/* eslint-disable react-hooks/exhaustive-deps */
 // eslint-disable-next-line import/named
 import { ButtonProps } from 'primereact/button';
 import ErrorContainer from '../../../components/ErrorContainer/ErrorContainer';
 import CONSTANTS from '../utils/contanst';
-import ROUTES from '../../../navigation/routes';
 import { useEffect } from 'react';
 import useAuth from '../../../hooks/useAuth';
+import useAppNavigation from '../../../navigation/useAppNavigation';
 
 const SessionExpired = () => {
-    const navigate = useNavigate();
-    const { logout } = useAuth();
-
+    const { logoutWithoutRedirect } = useAuth();
+    const { goLogin } = useAppNavigation();
     useEffect(() => {
-        logout();
+        logoutWithoutRedirect();
     }, []);
 
     const buttons: ButtonProps[] = [
         {
             label: CONSTANTS.SESSION_EXPIRED.BUTTON.LABEL,
-            onClick: () => navigate(ROUTES.LOGIN),
+            onClick: goLogin,
             severity: 'help',
         },
     ];

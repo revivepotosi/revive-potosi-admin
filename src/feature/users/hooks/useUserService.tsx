@@ -7,7 +7,9 @@ import { User } from '../../../interfaces/user.interface';
 import useToast from '../../../hooks/useToast';
 
 const useUserService = () => {
-    const { token } = useAuth();
+    const {
+        session: { token },
+    } = useAuth();
     const { showToast } = useToast();
     const [users, setUsers] = useState<User[]>([]);
     const getUser = () => {

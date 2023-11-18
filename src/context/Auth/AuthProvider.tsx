@@ -2,23 +2,22 @@ import { useReducer } from 'react';
 import AuthContext, { initialState } from './AuthContext';
 import AuthReducer from './AuthReducer';
 import { LOGIN, LOGOUT } from './types';
-import { AuthProviderProps } from './props';
-import { useNavigate } from 'react-router-dom';
-import { Role } from '../../interfaces/role.interface';
-import ROUTES from '../../navigation/routes';
+import { AuthProviderProps, AuthState } from './props';
+import useAppNavigation from '../../navigation/useAppNavigation';
+import { Session } from '../../interfaces/session.interface';
 
 const AuthProvider = (props: AuthProviderProps) => {
     const [state, dispatch] = useReducer(AuthReducer, initialState);
-    const navigate = useNavigate();
+    const { goHome, goLogin } = useAppNavigation();
     const { children } = props;
 
-    const login = (token: string, userID: string, roles: Role[]) => {
+    const login = (session: Session) => {
         try {
             dispatch({
                 type: LOGIN,
-                payload: { ...initialState, token, userID, roles },
+                payload: { ...initialState, session },
             });
-            navigate(ROUTES.HOME);
+            goHome();
         } catch (error) {
             console.error(error);
         }
@@ -27,16 +26,25 @@ const AuthProvider = (props: AuthProviderProps) => {
     const logout = () => {
         try {
             dispatch({ type: LOGOUT, payload: { ...initialState } });
-            navigate(ROUTES.LOGIN);
+            goLogin();
         } catch (error) {
             console.error(error);
         }
     };
 
-    const value = {
+    const logoutWithoutRedirect = () => {
+        try {
+            dispatch({ type: LOGOUT, payload: { ...initialState } });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const value: AuthState = {
         ...state,
         login,
         logout,
+        logoutWithoutRedirect,
     };
 
     return (
