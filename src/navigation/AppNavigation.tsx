@@ -9,6 +9,7 @@ import ROUTES from './routes';
 import SessionExpired from '../feature/errors/container/SessionExpired';
 import globalRouter from './globalRouter';
 import Forbidden from '../feature/errors/container/Forbidden';
+import CreateUser from '../feature/users/containers/CreateUser';
 
 const AppNavigation = () => {
     const navigate = useNavigate();
@@ -24,6 +25,7 @@ const AppNavigation = () => {
                 }
             />
             <Route path={ROUTES.GENERAL_ERROR} element={<GeneralError />} />
+            <Route path={ROUTES.SESSION_EXPIRED} element={<SessionExpired />} />
             <Route
                 path={ROUTES.HOME}
                 element={
@@ -33,15 +35,8 @@ const AppNavigation = () => {
                 }
             >
                 <Route index element={<Home />} />
+                <Route path={ROUTES.USER.CREATE} element={<CreateUser />} />
             </Route>
-            <Route
-                path={ROUTES.SESSION_EXPIRED}
-                element={
-                    <RequireAuth>
-                        <SessionExpired />
-                    </RequireAuth>
-                }
-            />
             <Route
                 path={ROUTES.FORBIDDEN}
                 element={

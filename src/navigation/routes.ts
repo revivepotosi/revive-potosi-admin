@@ -5,6 +5,9 @@ const ROUTES = {
     ALL: '*',
     SESSION_EXPIRED: '/session-expired',
     FORBIDDEN: '/forbidden',
+    USER: {
+        CREATE: '/user/create',
+    },
 };
 
 export default ROUTES;

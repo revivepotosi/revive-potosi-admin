@@ -10,3 +10,13 @@ export interface User {
     roles: Role[];
     isActive: boolean;
 }
+
+export const defaultUser: User = {
+    _id: '',
+    username: '',
+    email: '',
+    name: '',
+    lastname: '',
+    roles: [],
+    isActive: true,
+};

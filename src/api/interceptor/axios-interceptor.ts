@@ -31,15 +31,12 @@ axiosInstance.interceptors.response.use(
         const status = error.response?.status;
         if (status === HttpStatusCode.Unauthorized && globalRouter) {
             globalRouter.navigate?.(ROUTES.SESSION_EXPIRED);
-            return new Promise(() => {});
         }
         if (status === HttpStatusCode.Forbidden && globalRouter) {
             globalRouter.navigate?.(ROUTES.FORBIDDEN);
-            return new Promise(() => {});
         }
         if (status === HttpStatusCode.InternalServerError && globalRouter) {
             globalRouter.navigate?.(ROUTES.GENERAL_ERROR);
-            return new Promise(() => {});
         }
         return Promise.reject(error.response?.data);
     },

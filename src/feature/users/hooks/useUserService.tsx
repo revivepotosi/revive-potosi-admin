@@ -1,37 +1,31 @@
-import { useState } from 'react';
 // eslint-disable-next-line import/named
 import { AxiosResponse } from 'axios';
 import axiosInstance from '../../../api/interceptor/axios-interceptor';
 import useAuth from '../../../hooks/useAuth';
 import { User } from '../../../interfaces/user.interface';
-import useToast from '../../../hooks/useToast';
 
 const useUserService = () => {
     const {
         session: { token },
     } = useAuth();
-    const { showToast } = useToast();
-    const [users, setUsers] = useState<User[]>([]);
-    const getUser = () => {
-        axiosInstance
-            .get('user', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
+
+    const getUser = async () => {
+        try {
+            const response: AxiosResponse<User[]> = await axiosInstance.get(
+                'user',
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 },
-            })
-            .then((response: AxiosResponse<User[]>) => {
-                const data = response.data;
-                setUsers(data);
-            })
-            .catch((error) => {
-                showToast({
-                    severity: 'error',
-                    summary: 'Algo ha ocurrido',
-                    detail: error.message,
-                });
-            });
+            );
+            const users: User[] = response.data;
+            return users;
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
     };
-    return { users, getUser };
+    return { getUser };
 };
 
 export default useUserService;
